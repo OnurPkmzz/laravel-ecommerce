@@ -4,6 +4,25 @@ export function deleteItem() {
 
         e.preventDefault()
         let url = $(this).attr("href")
-        alert(url)
-    });
+        if (url !== null) {
+
+            let confirmation = confirm("Bu kaydı silmek istediğinize emin misiniz?");
+
+            if (confirmation == true) {
+
+                axios.delete(url).then(res => {
+
+                    $(this).parents('tr').fadeOut();
+
+                    alert(res.data);
+
+                }).catch(err => {
+
+                    console.log(err)
+
+                });
+
+            }
+        }
+    })
 }
