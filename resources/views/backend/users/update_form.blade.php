@@ -63,39 +63,28 @@
                     </div>
                 </div>
 
-                <h2>Yeni Kullanıcı Ekle</h2>
+                <h2>Kullanıcı Düzenle</h2>
                 <div class="table-responsive">
-                    <form action="{{ url('/users') }}" method="POST">
+                    <form action="{{ url("/users/$user->user_id") }}" method="POST">
                         @csrf
+                        @method("PUT")
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-6">
                                     <label for="name" class="form-label">Ad Soyad</label>
-                                    <input type="text" class="form-control" id="name" name="name"
-                                        placeholder="Ad soyad giriniz">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Ad soyad giriniz" value="{{ $user->name }}">
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="email" class="form-label">E-mail</label>
-                                    <input type="email" class="form-control" id="email" name="email"
+                                    <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}"
                                         placeholder="Mail adresi giriniz">
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <label for="Password" class="form-label">Şifre Giriniz</label>
-                                    <input type="password" class="form-control" id="password" name="password"
-                                        placeholder="Şifre giriniz">
-                                </div>
-                                <div class="col-lg-6">
-                                    <label for="password2" class="form-label">Şifre tekrarı</label>
-                                    <input type="password" class="form-control" id="password2" name="password2"
-                                        placeholder="Şifrenizi tekrar giriniz" >
-                                </div>
-                            </div>
+
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-check mt-3">
-                                        <input class="form-check-input" type="checkbox" id="is_admin" value="1"
+                                        <input class="form-check-input" type="checkbox" id="is_admin" value="1" {{$user->is_admin == 1 ? "checked" : ""}}
                                             name="is_admin" checked>
                                         <label class="form-check-label" for="is_admin">
                                             Yetkili Kullanıcı
@@ -104,7 +93,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-check mt-3">
-                                        <input class="form-check-input" type="checkbox" id="is_active" value="1"
+                                        <input class="form-check-input" type="checkbox" id="is_active" value="1" {{$user->is_active == 1 ? "checked" : ""}}
                                             name="is_active" checked>
                                         <label class="form-check-label" for="is_active">
                                             Aktif Kullanıcı

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -38,10 +38,6 @@ class UserController extends Controller
         $is_active = $req->get("is_active", default: 0);
 
 
-        $is_admin = $is_admin == "on" ? 1 : 0;
-        $is_active = $is_active == "on" ? 1 : 0;
-
-
         $user = new User();
         $user->name = $name;
         $user->email = $email;
@@ -57,25 +53,40 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        return "show";
+        return "show => $id";
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        return "edit";
+        $user = User::find($id);
+
+
+        return view('backend.users.update_form', ["user" => $user]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $req, string $id)
     {
-        return "update";
+
+        $name = $req->get("name");
+        $email = $req->get("email");
+        $is_admin = $req->get("is_admin", default: 0);
+        $is_active = $req->get("is_active", default: 0);
+
+        $user = User::find($id);
+        $user-> name = $name;
+        $user-> email = $email;
+        $user-> is_admin = $is_admin;
+        $user-> is_active = $is_active;
+        $user -> save();
+        return Redirect::to("/users");
     }
 
     /**
