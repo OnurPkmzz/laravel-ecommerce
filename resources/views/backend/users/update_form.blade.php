@@ -59,7 +59,7 @@
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">Kullanıcılar</h1>
                     <div class="btn-group me-2">
-                        <a href="/users/create" class="btn bt-sm btn-outline-danger">Yeni Ekle</a>
+                        <a href="/users" class="btn bt-sm btn-outline-success">Geri dön</a>
                     </div>
                 </div>
 

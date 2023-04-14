@@ -5,7 +5,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dashboard users page</title>
+    <title>Yönetim Paneli @yield("title")</title>
     @vite('resources/css/app.css')
     @vite('resources/css/dashboard.css')
 
@@ -44,7 +44,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href={{ url('/users') }}>
                                 <span data-feather="users" class="align-text-bottom"></span>
-                                Şifre değiştir
+                                Kullanıcılar
                             </a>
                         </li>
 
@@ -57,42 +57,15 @@
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Kullanıcılar</h1>
+                    <h1 class="h2">@yield("title")</h1>
                     <div class="btn-group me-2">
-                        <a href="/users" class="btn bt-sm btn-outline-success">Geri dön</a>
+                        <a href="@yield("add_new_url")" class="btn bt-sm btn-outline-success">@yield('load-backButton')</a>
                     </div>
                 </div>
 
-                <h2>Şifre Değiştirme Formu</h2>
+                <h2>@yield("subtitle")</h2>
                 <div class="table-responsive">
-                    <form action="{{ url("/users/$user->user_id/change-password")}}" method="POST">
-                        @csrf
-                        <div class="container">
-
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <label for="Password" class="form-label">Şifre Giriniz</label>
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Şifre giriniz">
-                                        @error("password")
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                </div>
-                                <div class="col-lg-6">
-                                    <label for="password_confirmation" class="form-label">Şifre tekrarı</label>
-                                    <input type="password" class="form-control" id="password_confirmation" name="password_confirmation"
-                                        placeholder="Şifrenizi tekrar giriniz" >
-                                        @error("password")
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-secondary">Kaydet</button>
-                                </div>
-                            </div>
-                    </form>
+                    @yield("content")
                 </div>
             </main>
         </div>
