@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
+    public function __construct(){
+        $this->returnUrl = "/users";
+    }
     /**
      * Display a listing of the resource.
      */
@@ -33,40 +36,33 @@ class UserController extends Controller
      */
     public function store(UserRequest $req)
     {
-        $name = $req->get("name");
-        $email = $req->get("email");
-        $password = $req->get("password");
-        $is_admin = $req->get("is_admin", default: 0);
-        $is_active = $req->get("is_active", default: 0);
-
+        // @2. Yol
+        // $name = $req->get("name");
+        // $email = $req->get("email");
+        // $password = $req->get("password");
+        // $is_admin = $req->get("is_admin", default: 0);
+        // $is_active = $req->get("is_active", default: 0);
+        // $user = new User();
+        // $user->name = $name;
+        // $user->email = $email;
+        // $user->password = Hash::make($password);
+        // $user->is_admin = $is_admin;
+        // $user->is_active = $is_active;
+        // $user->save();
 
         $user = new User();
-        $user->name = $name;
-        $user->email = $email;
-        $user->password = Hash::make($password);
-        $user->is_admin = $is_admin;
-        $user->is_active = $is_active;
-
+        $data = $this->prepare($req, $user->getFillable());
+        $user->fill($data);
         $user->save();
-
-        return Redirect::to("/users");
+        return Redirect::to($this->returnUrl);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id)
-    {
-        return "show => $id";
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = User::find($id);
-
 
         return view('backend.users.update_form', ["user" => $user]);
     }
@@ -74,30 +70,34 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UserRequest $req, string $id)
+    public function update(UserRequest $req, User $user)
     {
 
-        $name = $req->get("name");
-        $email = $req->get("email");
-        $is_admin = $req->get("is_admin", default: 0);
-        $is_active = $req->get("is_active", default: 0);
+        // @2. yol
+        // $name = $req->get("name");
+        // $email = $req->get("email");
+        // $is_admin = $req->get("is_admin", default: 0);
+        // $is_active = $req->get("is_active", default: 0);
 
-        $user = User::find($id);
-        $user-> name = $name;
-        $user-> email = $email;
-        $user-> is_admin = $is_admin;
-        $user-> is_active = $is_active;
+        // $user-> name = $name;
+        // $user-> email = $email;
+        // $user-> is_admin = $is_admin;
+        // $user-> is_active = $is_active;
+        // $user -> save();
+        // return Redirect::to($this->returnUrl);
+
+        $data = $this->prepare($req, $user->getFillable());
+        $user->fill($data);
         $user -> save();
-        return Redirect::to("/users");
+        return Redirect::to($this->returnUrl);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
 
-        $user = User::find($id);
         $user -> delete();
         return response('Kullanıcı başarıyla silindi.');
 
@@ -108,9 +108,16 @@ class UserController extends Controller
 
     }
     public function changePassword(User $user, UserRequest $req){
-        $password = $req->get("password");
-        $user->password = Hash::make($password);
+
+        $data = $this->prepare($req, $user->getFillable());
+        $user->fill($data);
         $user->save();
-        return Redirect::to('/users');
+        return Redirect::to($this->returnUrl);
+
+        // @2. YOL
+        // $password = $req->get("password");
+        // $user->password = Hash::make($password);
+        // $user->save();
+        // return Redirect::to($this->returnUrl);
     }
 }
