@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -29,7 +30,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $req)
+    public function store(UserRequest $req)
     {
         $name = $req->get("name");
         $email = $req->get("email");
@@ -72,7 +73,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $req, string $id)
+    public function update(UserRequest $req, string $id)
     {
 
         $name = $req->get("name");
@@ -99,5 +100,14 @@ class UserController extends Controller
         $user -> delete();
         return response('Kullanıcı başarıyla silindi.');
 
+    }
+    public function passwordForm(User $user){
+
+        return view('backend.users.password_form', ["user" => $user]);
+
+
+    }
+    public function changePassword(Request $request){
+        dd($request->all());
     }
 }

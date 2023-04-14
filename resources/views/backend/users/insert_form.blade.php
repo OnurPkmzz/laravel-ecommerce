@@ -71,25 +71,34 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <label for="name" class="form-label">Ad Soyad</label>
-                                    <input type="text" class="form-control" id="name" name="name"
-                                        placeholder="Ad soyad giriniz">
+                                    <input type="text" class="form-control" id="name" name="name" value="{{old("name")}}" placeholder="Ad soyad giriniz">
+                                    @error("name")
+                                    <span class="text-danger">{{$message}}</span>
+                                    @enderror
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="email" class="form-label">E-mail</label>
-                                    <input type="email" class="form-control" id="email" name="email"
-                                        placeholder="Mail adresi giriniz">
+                                    <input type="text" class="form-control" id="email" name="email" value="{{old("email")}}" placeholder="Mail adresi giriniz">
+                                    @error("email")
+                                    <span class="text-danger">{{$message}}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <label for="Password" class="form-label">Şifre Giriniz</label>
-                                    <input type="password" class="form-control" id="password" name="password"
-                                        placeholder="Şifre giriniz">
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Şifre giriniz">
+                                        @error("password")
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                 </div>
                                 <div class="col-lg-6">
-                                    <label for="password2" class="form-label">Şifre tekrarı</label>
-                                    <input type="password" class="form-control" id="password2" name="password2"
+                                    <label for="password_confirmation" class="form-label">Şifre tekrarı</label>
+                                    <input type="password" class="form-control" id="password_confirmation" name="password_confirmation"
                                         placeholder="Şifrenizi tekrar giriniz" >
+                                        @error("password")
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                 </div>
                             </div>
                             <div class="row">

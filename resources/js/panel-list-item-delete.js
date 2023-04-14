@@ -14,7 +14,6 @@ export function deleteItem() {
 
                     $(this).parents('tr').fadeOut();
 
-                    alert(res.data);
 
                 }).catch(err => {
 
