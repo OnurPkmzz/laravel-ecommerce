@@ -1,8 +1,9 @@
 @extends('backend.shared.backend_theme')
 @section('title', 'kullanıcılar')
 @section('subtitle', 'Yeni kullanıcı ekle')
-@section('add_new_url', url('/users'))
-@section('load-backButton', 'Geri dön')
+@section('btn_url', url('/users'))
+@section('btn_label', 'Geri dön')
+@section('btn_icon', 'arrow-left')
 @section('content')
     <form action="{{ url('/users') }}" method="POST">
         @csrf

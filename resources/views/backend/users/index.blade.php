@@ -1,8 +1,9 @@
 @extends('backend.shared.backend_theme')
 @section('title', 'Kullanıcı Modülü')
 @section('subtitle', 'kullanıcılar')
-@section('add_new_url', url("/users/create"))
-@section('load-backButton', 'Yeni ekle')
+@section('btn_url', url('/users/create'))
+@section('btn_label', 'Yeni Ekle')
+@section('btn_icon', 'plus')
 @section('content')
 <table class="table table-striped table-sm">
     <thead>

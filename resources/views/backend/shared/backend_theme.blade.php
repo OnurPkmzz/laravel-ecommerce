@@ -33,23 +33,8 @@
         <div class="row">
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-body-tertiary sidebar collapse">
                 <div class="position-sticky pt-3 sidebar-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">
 
-                                <span data-feather="home" class="align-text-bottom"></span>
-                                Yönetim paneli
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href={{ url('/users') }}>
-                                <span data-feather="users" class="align-text-bottom"></span>
-                                Kullanıcılar
-                            </a>
-                        </li>
-
-                    </ul>
-
+                    @include('backend.shared.leftnav')
 
                 </div>
             </nav>
@@ -59,7 +44,7 @@
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">@yield("title")</h1>
                     <div class="btn-group me-2">
-                        <a href="@yield("add_new_url")" class="btn bt-sm btn-outline-success">@yield('load-backButton')</a>
+                        <a href="@yield("btn_url")" class="btn bt-sm btn-outline-success"><span data-feather="@yield("btn_icon")"></span> @yield('btn_label')</a>
                     </div>
                 </div>
 
