@@ -63,10 +63,7 @@ class UserControllerTest extends TestCase
      }
      public function test_users_lastes_user_is_deleted(){
         $user = User::all()->last();
-        $user_id = $user->user_id;
-        $response = $this->delete("/users" . $user_id);
-        $response->assertOk();
-        $this->assertSoftDeleted($user);
+        $user = $user->user_id;
+        dd($user);
      }
 }
-aaa

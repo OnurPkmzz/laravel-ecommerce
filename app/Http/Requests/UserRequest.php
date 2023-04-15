@@ -33,9 +33,9 @@ class UserRequest extends FormRequest
 
     public function messages(){
             return [
-             "name.required" => "Bu alan zorunludur.",
+             "name.required" => "Ad soyad zorunludur.",
              "name.min" => "Ad soyad alanı en az 3 karakter olmalıdır.",
-             "email.required" => "Bu alan zorunludur",
+             "email.required" => "E posta zorunludur",
              "email.email" => "Girdiğiniz değer e posta formatına uygun olmalıdır.",
              "email.unique" => "Girdiğiniz email sistemde zaten kayıtlı.",
              "password.required" => "Şifre alanı zorunludur.",

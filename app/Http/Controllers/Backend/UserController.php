@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Http\Requests\UserRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
@@ -54,7 +52,13 @@ class UserController extends Controller
         $data = $this->prepare($req, $user->getFillable());
         $user->fill($data);
         $user->save();
-        return Redirect::to($this->returnUrl);
+
+
+        return response('Kullanıcı başarıyla eklendi');
+
+
+
+        //return Redirect::to($this->returnUrl);
     }
 
     /**
@@ -89,7 +93,9 @@ class UserController extends Controller
         $data = $this->prepare($req, $user->getFillable());
         $user->fill($data);
         $user -> save();
-        return Redirect::to($this->returnUrl);
+        return response('Kullanıcı başarıyla eklendi');
+
+       // return Redirect::to($this->returnUrl);
     }
 
     /**

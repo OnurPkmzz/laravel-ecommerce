@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Yönetim Paneli @yield("title")</title>
     @vite('resources/css/app.css')
-    @vite('resources/css/dashboard.css')
+   {{--  @vite('resources/css/dashboard.css') --}}
 
 </head>
 
