@@ -52,4 +52,20 @@ class UserControllerTest extends TestCase
          $response = $this->post('/users', $data);
          $response->assertRedirect("/users");
      }
+     public function test_users_existing_user_is_updated(){
+        $user = User::all()->last();
+        $user->name = "UPDATED" . $user->name;
+        $user->email = "email" . $user->email;
+        $data = $user->toArray();
+        $response = $this->put("/users/" . $user->user_id, $data);
+        $response->assertRedirect("/users");
+
+     }
+     public function test_users_lastes_user_is_deleted(){
+        $user = User::all()->last();
+        $user_id = $user->user_id;
+        $response = $this->delete("/users" . $user_id);
+        $response->assertOk();
+        $this->assertSoftDeleted($user);
+     }
 }
