@@ -69,3 +69,4 @@ class UserControllerTest extends TestCase
         $this->assertSoftDeleted($user);
      }
 }
+aaa
