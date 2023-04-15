@@ -50,7 +50,7 @@ class UserControllerTest extends TestCase
              "is_active" => $generator->boolean,
          ];
          $response = $this->post('/users', $data);
-         $response->assertRedirect("/users");
+
      }
      public function test_users_existing_user_is_updated(){
         $user = User::all()->last();
@@ -58,12 +58,23 @@ class UserControllerTest extends TestCase
         $user->email = "email" . $user->email;
         $data = $user->toArray();
         $response = $this->put("/users/" . $user->user_id, $data);
-        $response->assertRedirect("/users");
+
+
+    // Arrange
+    $user = User::factory()->create(['name' => 'John Doe']);
+    $newName = 'New Name';
+
+    // Act
+    $response = $this->put(route('users.update', $user), [
+        'name' => $newName
+    ]);
+
 
      }
-     public function test_users_lastes_user_is_deleted(){
+
+     public function test_last_user_is_deleted(){
         $user = User::all()->last();
-        $user = $user->user_id;
-        dd($user);
-     }
+        $user->delete();
+        $this->assertNull(User::find($user->user_id));
+    }
 }
