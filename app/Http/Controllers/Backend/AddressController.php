@@ -2,74 +2,69 @@
 
 namespace App\Http\Controllers\Backend;
 
-
 use App\Http\Controllers\Controller;
-use App\Models\Adress;
+use App\Models\addrs;
 use App\Http\Requests\AddressRequest;
 use App\Models\User;
-
-
+use Illuminate\Contracts\View\View;
 
 class AddressController extends Controller
 {
-    public function __construct(){
-        $this->returnUrl = "/users/{}/addresses ";
-    }
-    public function index(User $user)
+    public function __construct()
     {
-        $addrs = $user->addrs;
-        return view("Backend.addresses,index",  ["addrs" => $addrs]);
+        $this->returnUrl = "/users/{}/addresses";
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function index(User $user): View
+    {
+        $addrs = $user->addrs;
+
+        return view("backend.addresses.index", ["addrs" => $addrs, "user" => $user]);
+    }
+
     public function create(User $user)
     {
         return view('backend.addresses.insert_form', ["user" => $user]);
-
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(User $user, AddressRequest $req)
     {
-        $addr = new Adress();
+        $addr = new addrs();
         $data = $this->prepare($req, $addr->getFillable());
         $addr->fill($data);
         $addr->save();
+        $this -> editReturnUrl($user -> user_id);
+
+
+        return response('Kullanıcı başarıyla eklendi');
+
+
+
+        //return Redirect::to($this->returnUrl);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(User $user, Addrs $address)
     {
-        //
+        return view('backend.addresses.update_form', ["user" => $user, "addr" => $address]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(User $user, AddressRequest $address)
+    public function update( User $user, AddressRequest $request,Addrs $addr)
     {
-        return view('backend.users.update_form', ["user" => $user , "addr" => $address ]);
+        $data = $this->prepare($request, $addr->getFillable());
+        $addr->fill($data);
+        $addr->save();
+        $this->editReturnUrl($user->user_id);
+
+        return response('Adres başarıyla güncellendi.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(AddressRequest $request,User $user, Adress $adress)
+    public function destroy(User $user, addrs $address)
     {
-        //
+        $address->delete();
+        return response('Adres başarıyla silindi.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    private function editReturnUrl($id)
     {
-        //
+        $this->returnUrl = "/users/$id/addresses";
     }
 }

@@ -49,6 +49,11 @@
                                 <span data-feather="lock"></span>
                                 Şifre değiştir
                             </a>
+                        </li>  <li class="nav-item">
+                            <a class="nav-link text-black" href="{{url("/users/$user->user_id/addresses")}}">
+                                <span data-feather="map-pin"></span>
+                                Adreslerim
+                            </a>
                         </li>
                     </ul>
                 </td>

@@ -11,7 +11,7 @@ class AddressRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,11 +23,11 @@ class AddressRequest extends FormRequest
     {
 
         return [
-            "user_id" => "required|numeric",
+            "address_id" => "required|numeric",
             "city" => "required|min:3",
             "district" => "required|min:3",
             "zipcode" => "required|min:3",
-            "address" => "required|min:15"
+            "address" => "required|min:5"
         ];
     }
 
